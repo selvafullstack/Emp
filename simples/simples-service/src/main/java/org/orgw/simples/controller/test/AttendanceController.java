@@ -33,5 +33,26 @@ protected String getServiceCode() {
 		return response(attendanceService.addAttendance(attendanceRequest));
 				
 	}
+	
+	@PostMapping(value={"/user/getattendance"}, produces={"application/json; charset=UTF-8"})
+	  public Response getattendance(@RequestBody AttendanceRequest attendanceRequest)
+	    throws BaseException
+	  {
+	    return response(this.attendanceService.getattendance(attendanceRequest));
+	  }
+	  
+	  @PostMapping(value={"/user/checkin"}, produces={"application/json; charset=UTF-8"})
+	  public Response attendancecheckin(@RequestBody AttendanceRequest attendanceRequest)
+	    throws BaseException
+	  {
+	    return response(this.attendanceService.checkin(attendanceRequest));
+	  }
+	  
+	  @PostMapping(value={"/user/checkout"}, produces={"application/json; charset=UTF-8"})
+	  public Response attendancecheckout(@RequestBody AttendanceRequest attendanceRequest)
+	    throws BaseException
+	  {
+	    return response(this.attendanceService.checkout(attendanceRequest));
+	  }
    
 }

@@ -7,4 +7,6 @@ public interface IAttendanceRepository extends DataRepository<Attendance>{
 
 	Attendance getattendancedetails(String checkin);
 
+	Attendance getEmployeeDetailByDate(String empid, String date);
+
 }

@@ -24,5 +24,17 @@ public class AttendanceRepository extends AbstractBaseRepository<Attendance> imp
 				}
 				return null;
 	}
+	@Override
+	public Attendance getEmployeeDetailByDate(String empid, String date) {
+		try{
+	        return this.getEntityManager().createQuery("select sc from Attendance sc where sc.empid=:empid ", Attendance.class)
+	        		.setParameter("empid", empid)
+	        		.setParameter("date", date)
+	        		.getSingleResult();
+			}catch(NoResultException  e){
+				LOG.debug("AttendanceRepository :: by getEmployeeDetailByDate :: NoResultException");
+			}
+		return null;
+	}
 
 }

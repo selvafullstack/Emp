@@ -9,6 +9,7 @@ public class AttendanceRequest implements Serializable {
 	private String checkout;
 	private String totaltime;
 	private String date;
+	private String attendid;
 	
 	
 	public String getEmpid() {
@@ -44,5 +45,11 @@ public class AttendanceRequest implements Serializable {
 	public void setDate(String date) {
 		this.date = date;
 	}
-
+	public String getAttendid() {
+		return attendid;
+	}
+	public void setAttendid(String attendid) {
+		this.attendid = attendid;
+	}
+	
 }
