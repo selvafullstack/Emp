@@ -44,6 +44,7 @@ public class LeaveService implements ILeaveService {
 		entity.setLeavetype(request.getLeavetype());
 		entity.setCc(request.getCc());
 		entity.setDate(request.getDate());
+	
 		leaveRequestRepository.save(entity);
 		leaveRequestRepository.refresh(entity);
         
@@ -77,12 +78,13 @@ public class LeaveService implements ILeaveService {
 		
 		String todate = request.getTodate();
 		
-		String to ="selva.orgware@gmail.com";
+		String to ="ragavan.orgware@gmail.com";
         // Sender's email ID needs to be mentioned
          String  from = request.getFromdate();
         final String username = "selva.orgware@gmail.com";//change accordingly
         final String password = "8903531780";//change accordingly
         String subject =request.getSubject();
+        String content = request.getContent();
         // Assuming you are sending email through relay.jangosmtp.net
         String host = "smtp.gmail.com";    ;
 
@@ -114,7 +116,7 @@ public class LeaveService implements ILeaveService {
 	      msg.setSubject(subject, "UTF-8");
 	      
 	      BodyPart messageBodyPart = new MimeBodyPart();
-	      messageBodyPart.setText("TEST");
+	      messageBodyPart.setText("Test");
 	      
 	      Multipart multiPart = new MimeMultipart();
 	      
@@ -122,26 +124,18 @@ public class LeaveService implements ILeaveService {
 	      
 	      messageBodyPart = new MimeBodyPart();
 	      
-	      messageBodyPart.setContent("","text/html");
+	      messageBodyPart.setContent(content,"text/html");
 	      multiPart.addBodyPart(messageBodyPart);
 	      msg.setContent(multiPart);
 
 //	      msg.setText("Sample", "UTF-8");
-
-	    
-	      System.out.println("Message is ready");
-	      
+ System.out.println("Message is ready");
 	      
   	      Transport.send(msg);
   	    
     	 }catch(Exception e) {
-    		 
-    		 
-    		
     	 }
-    	
     	 return entity;
-    		
 	}
 
 

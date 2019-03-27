@@ -30,7 +30,7 @@ protected String getServiceCode() {
 	@PostMapping(value="/user/attendance", produces = "application/json; charset=UTF-8")
 	public Response attendance(@RequestBody AttendanceRequest attendanceRequest)throws BaseException {
 		
-		return response(attendanceService.addAttendance(attendanceRequest));
+		return response(this.attendanceService.addAttendance(attendanceRequest));
 				
 	}
 	

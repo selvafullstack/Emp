@@ -10,6 +10,7 @@ public class LeaveResponse {
 	private String leavetype;
 	private String subject;
 	private String date;
+	private String content;
 	public String getEmpid() {
 		return empid;
 	}
@@ -57,6 +58,12 @@ public class LeaveResponse {
 	}
 	public void setDate(String date) {
 		this.date = date;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
 	}
 	
 }

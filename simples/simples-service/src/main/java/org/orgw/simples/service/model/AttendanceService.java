@@ -47,6 +47,8 @@ public AttendanceResponse addAttendance(AttendanceRequest attendanceRequest) {
     id = employee.getEmpid();
   }
   return attendancedetails(attendanceRequest, id);
+  
+  
 }
 
 private AttendanceResponse attendancedetails(AttendanceRequest attendanceRequest, String id) {
