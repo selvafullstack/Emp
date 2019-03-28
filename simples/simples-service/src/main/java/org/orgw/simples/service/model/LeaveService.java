@@ -1,5 +1,8 @@
 package org.orgw.simples.service.model;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.Properties;
 
 import javax.mail.BodyPart;
@@ -18,11 +21,12 @@ import org.orgw.simples.data.LeaveRequest;
 import org.orgw.simples.data.LeaveResponse;
 import org.orgw.simples.repository.ILeaveRequestRepository;
 import org.orgw.simples.repository.model.EmailDetails;
-import org.orgw.simples.repository.model.Users;
 import org.orgw.simples.service.ILeaveService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -128,8 +132,8 @@ public class LeaveService implements ILeaveService {
 	      multiPart.addBodyPart(messageBodyPart);
 	      msg.setContent(multiPart);
 
-//	      msg.setText("Sample", "UTF-8");
- System.out.println("Message is ready");
+	      //	      msg.setText("Sample", "UTF-8");
+	      System.out.println("Message is ready");
 	      
   	      Transport.send(msg);
   	    
@@ -137,79 +141,22 @@ public class LeaveService implements ILeaveService {
     	 }
     	 return entity;
 	}
-
-
-//	private LeaveResponse sendmail(LeaveRequest request) {
-//
-//
-//		String to = request.getTo();
-//
-//        // Sender's email ID needs to be mentioned
-//         String  from = request.getFrom();
-//        final String username = "selva.orgware@gmail.com";//change accordingly
-//        final String password = "8903531780";//change accordingly
-//        String subject =request.getSubject();
-//        // Assuming you are sending email through relay.jangosmtp.net
-//        String host = "smtp.gmail.com";    
-//
-//        Properties props = new Properties();
-//        props.put("mail.smtp.auth", "true");
-//        props.put("mail.smtp.starttls.enable", "true");
-//        props.put("mail.smtp.host", host);
-//        props.put("mail.smtp.port", "25");
-//
-//        // Get the Session object.
-//        Session session = Session.getInstance(props,
-//           new javax.mail.Authenticator() {
-//              protected PasswordAuthentication getPasswordAuthentication() {
-//                 return new PasswordAuthentication(username, password);
-//  	   }
-//           });
-//    	 try{MimeMessage msg = new MimeMessage(session);
-//	      //set message headers
-//	      msg.addHeader("Content-type", "text/HTML; charset=UTF-8");
-//	      msg.addHeader("format", "flowed");
-//	      msg.addHeader("Content-Transfer-Encoding", "8bit");
-//
-//	      msg.setFrom(new InternetAddress(from, "NoReply-JD"));
-//
-//	      msg.setReplyTo(InternetAddress.parse(from, false));
-//	      msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to, false));
-//
-//	      msg.setSubject(subject, "UTF-8");
-//	      
-//	      BodyPart messageBodyPart = new MimeBodyPart();
-//	      messageBodyPart.setText("TEST");
-//	      
-//	      Multipart multiPart = new MimeMultipart();
-//	      
-//	      multiPart.addBodyPart(messageBodyPart);
-//	      
-//	      messageBodyPart = new MimeBodyPart();
-//	      
-//	      messageBodyPart.setContent("","text/html");
-//	      multiPart.addBodyPart(messageBodyPart);
-//	      msg.setContent(multiPart);
-//
-////	      msg.setText("Sample", "UTF-8");
-//
-//	    
-//	      System.out.println("Message is ready");
-//	      
-//	      
-//  	      Transport.send(msg);
-//  	    
-//    	 }catch(Exception e) {
-//    		 
-//    		 
-//    		
-//    	 }
-//    	
-//		
-//	}
-//	
 	
-
 	
+	    public List<EmailDetails> findAll() {
+	        String sql = "select * from myproject.leaveform";
+	        RowMapper<EmailDetails> rm = new RowMapper<EmailDetails>() {
+	            @Override
+	            public EmailDetails mapRow(ResultSet resultSet, int i) throws SQLException {
+	            	EmailDetails user = new EmailDetails(resultSet.getString("empid"),
+	                        resultSet.getString("mailid"),
+	                        resultSet.getString("subject"));
+	                    
+	                return user;
+	            } 
+	        };
 
+	        return leaveRequestRepository.query(sql, rm);
+
+}
 }

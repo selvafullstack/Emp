@@ -1,5 +1,7 @@
 package org.orgw.simples.repository.jpa;
 
+import java.util.List;
+
 import javax.persistence.NoResultException;
 
 import org.orgw.simples.repository.ILeaveRequestRepository;
@@ -7,6 +9,7 @@ import org.orgw.simples.repository.model.EmailDetails;
 import org.orgw.simples.repository.model.Users;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -26,8 +29,9 @@ public class LeaveRequestRepository extends AbstractBaseRepository<EmailDetails>
 				return null;
 			
 		}
-
-	
-	
-	
+	@Override
+	public List<EmailDetails> query(String sql, RowMapper<EmailDetails> rm) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

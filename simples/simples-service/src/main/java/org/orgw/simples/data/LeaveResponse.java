@@ -4,6 +4,7 @@ public class LeaveResponse {
 	
 	private String empid;
 	private String mailid;
+	private String tomailid;
 	private String fromdate;
 	private String todate;
 	private String cc;
@@ -64,6 +65,12 @@ public class LeaveResponse {
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public String getTomailid() {
+		return tomailid;
+	}
+	public void setTomailid(String tomailid) {
+		this.tomailid = tomailid;
 	}
 	
 }

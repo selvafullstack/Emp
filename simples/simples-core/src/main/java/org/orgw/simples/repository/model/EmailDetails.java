@@ -1,7 +1,6 @@
 package org.orgw.simples.repository.model;
 
 import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,8 +10,6 @@ import javax.persistence.Table;
 
 @Table(name="leaveform")
 @Entity
-
-
 public class EmailDetails  implements Serializable{
 	@Id
 	@Column(name = "id", nullable = false)
@@ -37,6 +34,12 @@ public class EmailDetails  implements Serializable{
 	private String date;
 	
 	
+	public EmailDetails(String string, String string2, String string3) {
+		// TODO Auto-generated constructor stub
+	}
+	public EmailDetails() {
+		// TODO Auto-generated constructor stub
+	}
 	public String getCc() {
 		return cc;
 	}
@@ -87,5 +90,4 @@ public class EmailDetails  implements Serializable{
 	public void setDate(String date) {
 		this.date = date;
 	}
-
 }
